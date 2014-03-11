@@ -1,17 +1,17 @@
 package sipcentric
 
 import (
-	"runtime"
-	"time"
+	"encoding/json"
 	"net"
 	"net/http"
-	"encoding/json"
+	"runtime"
+	"time"
 )
 
 type StreamEvent struct {
-	Event 		string					`json:"event"`
-	Location 	string					`json:"location"`
-	Values 		map[string]interface{}	`json:"values"`
+	Event    string                 `json:"event"`
+	Location string                 `json:"location"`
+	Values   map[string]interface{} `json:"values"`
 }
 
 func (api *Api) Stream() (<-chan *StreamEvent, error) {
@@ -19,7 +19,7 @@ func (api *Api) Stream() (<-chan *StreamEvent, error) {
 	// setup dialer
 	var conn net.Conn
 	dialer := func(netw, addr string) (net.Conn, error) {
-		netc, err := net.DialTimeout(netw, addr, 5 * time.Second)
+		netc, err := net.DialTimeout(netw, addr, 5*time.Second)
 		if err != nil {
 			return nil, err
 		}
@@ -27,7 +27,7 @@ func (api *Api) Stream() (<-chan *StreamEvent, error) {
 		return netc, nil
 	}
 
-    // setup request
+	// setup request
 	url := API_URL + "/stream"
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -39,12 +39,12 @@ func (api *Api) Stream() (<-chan *StreamEvent, error) {
 	client := &http.Client{
 		Transport: &http.Transport{
 			Dial: dialer,
-		},		
+		},
 	}
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
-	}   
+	}
 
 	ch := make(chan *StreamEvent)
 
@@ -64,7 +64,7 @@ func (api *Api) Stream() (<-chan *StreamEvent, error) {
 			} else {
 				// ignore
 
-			} 
+			}
 			runtime.Gosched()
 		}
 	}()

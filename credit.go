@@ -1,12 +1,12 @@
 package sipcentric
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 )
 
 type CreditStatus struct {
-	AccountType 	string  `json:"accountType"`
+	AccountType     string  `json:"accountType"`
 	CreditRemaining float32 `json:"creditRemaining"`
 }
 

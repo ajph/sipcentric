@@ -1,28 +1,28 @@
 package sipcentric
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
-	"encoding/json"
 )
 
 type SmsHistoryItem struct {
-	Uri 			string 		`json:"uri"`
-	Created 		string  	`json:"created"`
-	Direction 		string 		`json:"direction"`
-	From 			string 		`json:"from"`
-	To 				string 		`json:"to"`
-	Body 			string 		`json:"body"`
-	SendStatus 		string 		`json:"sendStatus,omitempty"`
-	DeliveryStatus 	int	 		`json:"deliveryStatus,omitempty"`
-	Cost 			float32 	`json:"cost"`
+	Uri            string  `json:"uri"`
+	Created        string  `json:"created"`
+	Direction      string  `json:"direction"`
+	From           string  `json:"from"`
+	To             string  `json:"to"`
+	Body           string  `json:"body"`
+	SendStatus     string  `json:"sendStatus,omitempty"`
+	DeliveryStatus int     `json:"deliveryStatus,omitempty"`
+	Cost           float32 `json:"cost"`
 }
 
 type SmsHistoryResult struct {
-	TotalItems 	int					`json:"totalItems"`
-	PageSize 	int					`json:"pageSize"`
-	Page 		int					`json:"page"`
-	Items 		[]SmsHistoryItem	`json:"items"`
+	TotalItems int              `json:"totalItems"`
+	PageSize   int              `json:"pageSize"`
+	Page       int              `json:"page"`
+	Items      []SmsHistoryItem `json:"items"`
 }
 
 func (api *Api) SmsHistory(page int, pageSize int) (*SmsHistoryResult, error) {
@@ -44,7 +44,7 @@ func (api *Api) SmsHistory(page int, pageSize int) (*SmsHistoryResult, error) {
 
 	default:
 		return nil, fmt.Errorf("Invalid response code %d", resp.StatusCode)
-	}	
+	}
 }
 
 func (api *Api) SendSms(from string, to string, message string) error {
