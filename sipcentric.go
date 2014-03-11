@@ -18,7 +18,7 @@ type Api struct {
 }
 
 func (api *Api) apiRequest(method string, path string, iord io.Reader) (*http.Response, error) {
-	// set up a HEAD request to validate auth
+	// set up request
 	url := API_URL + path
 	req, err := http.NewRequest(method, url, iord)
 	if err != nil {
@@ -38,6 +38,7 @@ func (api *Api) apiRequest(method string, path string, iord io.Reader) (*http.Re
 }
 
 func (api *Api) ValidateLogin() error {
+	// set up a HEAD request to validate auth
 	resp, err := api.apiRequest("HEAD", "/customers/me", nil)
 	if err != nil {
 		return err
