@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	API_URL = "http://pbx.sipcentric.com/api/v1"
+	API_URL = "https://pbx.sipcentric.com/api/v1"
 )
 
 type Api struct {
