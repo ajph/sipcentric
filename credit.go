@@ -7,7 +7,7 @@ import (
 
 type CreditStatus struct {
 	AccountType     string  `json:"accountType"`
-	CreditRemaining float32 `json:"creditRemaining"`
+	Balance float32 `json:"balance"`
 }
 
 func (api *Api) Credit() (*CreditStatus, error) {
