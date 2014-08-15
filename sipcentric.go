@@ -1,6 +1,6 @@
 package sipcentric
 
-// https://apigee.com/sipcentric/embed/console/beta
+// http://developer.sipcentric.com
 
 import (
 	"fmt"
